@@ -1,32 +1,59 @@
-.App {
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.app > h1 {
+  margin-bottom: 20px;
+  font-family: "方正舒体";
+  font-size: 1.8em;
   text-align: center;
 }
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+.app > .average-time {
+  font-size: 1.5em;
+  font-family: "方正舒体";
+}
+.app > .average-time > span {
+  display: inline-block;
+  margin-left: 10px;
+  color: #9de8e6;
+  font-size: 1.8em;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.app > ul {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+.app > ul > li {
+  width: 33.33%;
+  padding: 5px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-left-width: 0;
+  border-top-width: 0;
+}
+.app > ul > li:nth-child(3n+3) {
+  border-right-width: 0;
+}
+.app > ul > li:nth-child(-n+3) {
+  border-top-width: 1px;
+}
+.app > ul > li > h2 {
+  font-family: "幼圆";
+}
+.app .date,.app .time {
+  margin-bottom: 5px;
+  font-weight: 700;
+  font-family: "方正舒体";
+  color: #e98a7b;
+}
+.app button {
+  display: block;
+  width: 80%;
+  margin: 30px auto;
+  padding: 8px;
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  background: #ef9980;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 0 1px#f48565;
 }
