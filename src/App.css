@@ -1,9 +1,11 @@
 .app {
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 10px;
 }
 .app > h1 {
-  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-bottom: 15px;
   font-family: "方正舒体";
   font-size: 1.8em;
   text-align: center;
@@ -15,24 +17,39 @@
 .app > .average-time > span {
   display: inline-block;
   margin-left: 10px;
-  color: #9de8e6;
   font-size: 1.8em;
+}
+.app > .average-time.warning > span {
+  color: red;
+}
+.app > .average-time.normal > span {
+  color: #9de8e6;
+}
+.app > .average-time.excellent > span {
+  color: yellow;
+}
+.app > .average-time.amazing > span {
+  color:#e98a7b;
+}
+.app > .average-time.dying > span {
+  color: orange;
 }
 
 .app > ul {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 .app > ul > li {
+  position: relative;
   width: 33.33%;
   padding: 5px;
   border: 1px solid rgba(255,255,255,0.2);
   border-left-width: 0;
   border-top-width: 0;
 }
-.app > ul > li:nth-child(3n+3) {
-  border-right-width: 0;
+.app > ul > li:nth-child(3n+1) {
+  border-left-width: 1px;
 }
 .app > ul > li:nth-child(-n+3) {
   border-top-width: 1px;
@@ -46,6 +63,18 @@
   font-family: "方正舒体";
   color: #e98a7b;
 }
+.app .delete {
+  position: absolute;
+  right: 3px;
+  top: 3px;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url("img/delete.png") no-repeat center;
+  background-size: cover;
+  cursor: pointer;
+}
+
 .app button {
   display: block;
   width: 80%;
@@ -56,4 +85,5 @@
   border: none;
   border-radius: 5px;
   box-shadow: 0 0 0 1px#f48565;
+  cursor: pointer;
 }
