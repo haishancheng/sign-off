@@ -1,4 +1,4 @@
-* {margin: 0;padding: 0;}
+* {margin: 0; padding: 0;}
 *, *::before, *::after{box-sizing: border-box}
 a{text-decoration: none; color: inherit}
 ul, ol{list-style: none;}
@@ -8,4 +8,7 @@ h1, h2, h3, h4{font-size: inherit; font-weight: normal;}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+.anticon-close-circle {
+  color: #f5222d !important;
 }

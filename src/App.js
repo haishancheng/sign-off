@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './App.css'
 import moment from 'moment'
 import { Modal } from 'antd';
+import './App.css'
 const confirm = Modal.confirm;
 
 class App extends Component {
@@ -14,7 +14,12 @@ class App extends Component {
 
   signOff = () => {
     let {hasSignOff, currentDay} = this.state
-    if (hasSignOff === "yes" && moment().format("YYYY-MM-DD") === currentDay) {alert("当天已签退，如签退时间有误，请先删除！"); return}
+    if (hasSignOff === "yes" && moment().format("YYYY-MM-DD") === currentDay) {
+      Modal.info({
+        title: '当天已签退，如签退时间有误，请先删除！',
+      }); 
+      return
+    }
     this.setState((prevState) => {
       let newTimeList = [...prevState.timeList, {time: moment().format('YYYY-MM-DD HH:mm:ss')}]
       localStorage.setItem("timeList", JSON.stringify(newTimeList))
@@ -28,22 +33,35 @@ class App extends Component {
     })
   }
   
-  delete = () => {
+  delete = (index, date) => {
+    if (moment().format("YYYY-MM-DD") !== date) {
+      Modal.warning({
+        title: '目前只能删除添加当天的时间哦~',
+      })
+      return
+    }
     confirm({
-      title: 'Do you Want to delete these items?',
-      content: 'Some descriptions',
-      onOk() {
-        console.log('OK');
+      title: '确定删除本天签退记录？',
+      iconType: 'close-circle',
+      okText: '确定',
+      okType: 'danger',
+      cancelText: '取消',
+      onOk: () => {
+        console.log(index);
+        let {timeList} = this.state
+        timeList.splice(index, 1)
+        this.setState({timeList, hasSignOff: "no",})
+        localStorage.setItem("timeList", JSON.stringify(timeList))
+        localStorage.setItem("hasSignOff", "no")
       },
       onCancel() {
-        console.log('Cancel');
       },
     });
   }
 
   componentWillMount() {
     this.setState({
-      timeList: JSON.parse(localStorage.getItem("timeList")) || [],
+      timeList: JSON.parse(localStorage.getItem("timeList") || "[]" ),
       hasSignOff: localStorage.getItem("hasSignOff"),
       currentDay: localStorage.getItem("currentDay")
     })
@@ -67,10 +85,10 @@ class App extends Component {
                       {point: "23:00:00", class: "amazing"},
                       {point: "24:00:00", class: "dying"},
                     ]
-    let averageTimeClass = timePoint.find((item) => {
+    let timePointItem = timePoint.find((item) => {
       return moment(averageTime, "HH:mm:ss").valueOf() < moment(item.point, "HH:mm:ss").valueOf()
-    }).class
-
+    })
+    let averageTimeClass = timePointItem ? timePointItem : "normal"
     return (
       <div className="app">
         <h1>下班平均时间计算系统</h1>
@@ -83,7 +101,7 @@ class App extends Component {
                 <p className="date">{moment(item.time).format("YYYY-MM-DD")}</p>
                 <h2>下班时间:</h2>
                 <p className="time">{moment(item.time).format("HH:mm:ss")}</p>
-                <span className="delete" onClick={this.delete}></span>
+                <span className="delete" onClick={this.delete.bind(this, index, moment(item.time).format("YYYY-MM-DD"))}></span>
               </li>
             )
           }
