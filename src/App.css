@@ -1,5 +1,6 @@
 .app {
   max-width: 1200px;
+  height: 100vh;
   margin: 0 auto;
   padding: 0 10px;
 }
@@ -9,12 +10,15 @@
   color: white;
 }
 .app > h1 {
-  margin-top: 15px;
+  padding-top: 15px;
   font-family: "方正舒体";
   font-size: 1.8em;
   text-align: center;
 }
 .app > .average-time {
+  display: flex;
+  align-items: center;
+  height: 56px;
   font-size: 1.5em;
   font-family: "方正舒体";
 }
@@ -82,7 +86,7 @@
 .app button {
   display: block;
   width: 80%;
-  margin: 30px auto;
+  margin: 30px auto 50px;
   padding: 8px;
   color: white;
   background: #ef9980;
@@ -90,4 +94,24 @@
   border-radius: 5px;
   box-shadow: 0 0 0 1px#f48565;
   cursor: pointer;
+}
+
+.app .month .title  {
+  font-size: 1.5em;
+  font-family: "方正舒体";
+}
+.app .month .ant-calendar-picker  {
+  width: 100px;
+}
+
+.app footer {
+  position: fixed;
+  bottom: 0;
+  padding: 5px 0;
+  left: 0;
+  right: 0;
+  background: #423b4e;
+  font-size: 12px;
+  color: #ccc;
+  text-align: center;
 }
